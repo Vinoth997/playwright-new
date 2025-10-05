@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 60
     environment: test_tst04
 
@@ -26,10 +26,10 @@ jobs:
       - name: Build & Install
         run: mvn -B install -DskipTests --no-transfer-progress
 
-      - name: Ensure Playwright browsers
+      - name: Ensure browsers installed
         run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
-      - name: Run Playwright + TestNG tests
+      - name: Run testng tests
         run: mvn test
 
       - name: Environment variable
