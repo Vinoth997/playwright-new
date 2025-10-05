@@ -36,7 +36,7 @@ jobs:
         run: mvn -B install -DskipTests --no-transfer-progress
 
       - name: Ensure Playwright browsers
-        run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
+        run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps --skip-deps-check"
 
       - name: Run Playwright + TestNG tests
         run: mvn test
