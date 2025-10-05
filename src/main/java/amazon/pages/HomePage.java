@@ -63,6 +63,7 @@ public class HomePage extends BaseClassPW {
 	}
 	public void validate() {
 		CheckText(errorMsg, "Invalid email address.");
+		System.out.println("update");
 		
 
 	}
