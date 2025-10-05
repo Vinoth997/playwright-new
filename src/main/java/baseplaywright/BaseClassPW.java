@@ -2,6 +2,7 @@ package baseplaywright;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.BrowserType.LaunchOptions;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -19,35 +20,44 @@ public class BaseClassPW {
 	
 	
 	//opening Cross browser
-	public Page launchBrowser(String browserName,String site) {
-		 playwright = Playwright.create();
-		 
-		 switch (browserName.toLowerCase()) {
-		case "chromium":
-			browser = playwright.chromium().launch(new LaunchOptions().setHeadless(false));
-			break;
-		case "firefox":
-			browser = playwright.firefox().launch(new LaunchOptions().setHeadless(false));
-			break;
-		case "safari":
-			browser = playwright.webkit().launch(new LaunchOptions().setHeadless(false));
-			break;
-		case "chrome":
-			browser = playwright.chromium().launch(new LaunchOptions()
-					.setChannel("chrome")
-					.setHeadless(false));
-			break;
+	public Page launchBrowser(String browserName, String site, boolean isHeadless) {
+	    playwright = Playwright.create();
+	    Browser browser = null;
 
-		default:
-			System.out.println("please pass correct browserName....");
-			break;
-		}
-		 
-		 context = browser.newContext();
-		 page = context.newPage();		
-	     page.navigate(site);
-		return page;
+	    switch (browserName.toLowerCase()) {
+	        case "chromium":
+	            browser = playwright.chromium().launch(
+	                new BrowserType.LaunchOptions().setHeadless(isHeadless)
+	            );
+	            break;
+	        case "firefox":
+	            browser = playwright.firefox().launch(
+	                new BrowserType.LaunchOptions().setHeadless(isHeadless)
+	            );
+	            break;
+	        case "safari":
+	        case "webkit":
+	            browser = playwright.webkit().launch(
+	                new BrowserType.LaunchOptions().setHeadless(isHeadless)
+	            );
+	            break;
+	        case "chrome":
+	            browser = playwright.chromium().launch(
+	                new BrowserType.LaunchOptions()
+	                    .setChannel("chrome")
+	                    .setHeadless(isHeadless)
+	            );
+	            break;
+	        default:
+	            System.out.println("Please pass correct browserName....");
+	            return null;
+	    }
+
+	    Page page = browser.newPage();
+	    page.navigate(site);
+	    return page;
 	}
+
 	
 	//input/fill
 	public void enterText(Locator locator, String text) {
@@ -87,11 +97,20 @@ public class BaseClassPW {
 	public void closeBrowser() {
 		browser.close();
 	}
-	public void closePlaywright() {
-		playwright.close();
-	}
 	public void closeAll() {
-		page.context().browser().close();
+	    if (page != null) {
+	        page.context().browser().close();
+	    } else {
+	        System.out.println("⚠️ Page is null, nothing to close.");
+	    }
+	}
+	
+	public void closePlaywright() {
+	    if (playwright != null) {
+	        playwright.close();
+	    } else {
+	        System.out.println("⚠️ Playwright is null, nothing to close.");
+	    }
 	}
 	
 	//screenshot fn

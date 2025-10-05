@@ -23,17 +23,17 @@ public class HomePage extends BaseClassPW {
 	public HomePage(Page page) {
 		this.page=page;
 		//this.productpage=productpage;
-		this.SignIn=page.locator("[data-nav-ref='nav_ya_signin']");
+		this.SignIn=page.locator("//div[@class='nav-div']//a[@data-nav-role='signin']");
 		this.email=page.locator("input[type='email']");
 		this.continueBtn=page.locator("input.a-button-input");
-		this.errorMsg=page.locator("//h4[text()='There was a problem']");
+		this.errorMsg=page.locator("//div[@id='invalid-email-alert']//div[@class='a-alert-content']");
 		this.searchTab=page.locator("#twotabsearchtextbox");
 		this.searchBtn=page.locator("input[type='submit']");
-		this.product=page.locator("(//span[contains(@class,'a-size-medium a-color-base')])[1]");
+		this.product=page.locator("(//span[contains(text(),'OnePlus')]/parent::h2/parent::a)[1]");
 		this.pageResult=page.locator("(//div[contains(@class,'a-section a-spacing-small')])[1]");
 //		new page(product page)
-		addToCart ="#add-to-cart-button";
-		addedToCartMsg= "//span[text()[normalize-space()='Added to Cart']]";
+		addToCart ="//input[@id='add-to-cart-button']";
+		addedToCartMsg= "(//div[contains(@id,'CONF_MSG_SUCCESS')]/h1)[1]";
 		
 	
 	}
@@ -62,7 +62,7 @@ public class HomePage extends BaseClassPW {
 		
 	}
 	public void validate() {
-		CheckText(errorMsg, "There was a problem");
+		CheckText(errorMsg, "Invalid email address.");
 		
 
 	}
@@ -86,7 +86,7 @@ public class HomePage extends BaseClassPW {
 		});
 		
 		btnClick(productpage.locator(addToCart));
-		CheckText(productpage.locator(addedToCartMsg), "Added to Cart");
+		CheckText(productpage.locator(addedToCartMsg), "Added to cart");
 	}
 
 }
