@@ -30,7 +30,7 @@ public class HomePage extends BaseClassPW {
 		this.searchTab=page.locator("#twotabsearchtextbox");
 		this.searchBtn=page.locator("input[type='submit']");
 		this.product=page.locator("(//span[contains(text(),'OnePlus')]/parent::h2/parent::a)[1]");
-		this.pageResult=page.locator("(//div[contains(@class,'a-section a-spacing-small')])[1]");
+		this.pageResult=page.locator("(//div[@data-cy='title-recipe'])[1]");
 //		new page(product page)
 		addToCart ="//input[@id='add-to-cart-button']";
 		addedToCartMsg= "(//div[contains(@id,'CONF_MSG_SUCCESS')]/h1)[1]";
