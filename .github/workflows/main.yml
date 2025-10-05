@@ -1,0 +1,24 @@
+name: First Workflow
+
+on: [push, pull_request, issues, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the build
+        run: echo 'Build'
+
+  test:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - name: Print the test
+        run: echo 'Test'
+
+  deploy:
+    needs: [build, test]
+    runs-on: windows-latest
+    steps:
+      - name: Print the deploy
+        run: echo 'Deploy'
