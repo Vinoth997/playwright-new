@@ -23,7 +23,7 @@ public class HomePage extends BaseClassPW {
 	public HomePage(Page page) {
 		this.page=page;
 		//this.productpage=productpage;
-		this.SignIn=page.locator("(//a[contains(@href,'https://www.amazon.in/ap/signin')])[1]");
+		this.SignIn=page.locator("//span[contains(text(),'Account & Lists')]/parent::a");
 		this.email=page.locator("input[type='email']");
 		this.continueBtn=page.locator("input.a-button-input");
 		this.errorMsg=page.locator("//div[@id='invalid-email-alert']//div[@class='a-alert-content']");
