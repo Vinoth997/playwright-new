@@ -16,14 +16,14 @@ public class HomepageTest  {
 	@BeforeMethod
 	public void frontPage() {
 		BC = new BaseClassPW();
-		page = BC.launchBrowser("chrome", "https://www.amazon.in/",true);
+		page = BC.launchBrowser("chrome", "https://www.amazon.in/",false);
 		hp = new HomePage(page);
 	}
 	
 	@Test
 	public void TC1() {
-		hp.signInPage("vinoth");
-		hp.validate();
+		hp.searchFunction("oneplus earbuds");
+		hp.productAddToCart();
 	}
 	
 	@Test
