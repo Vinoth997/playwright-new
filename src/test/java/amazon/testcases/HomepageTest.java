@@ -16,7 +16,7 @@ public class HomepageTest  {
 	@BeforeMethod
 	public void frontPage() {
 		BC = new BaseClassPW();
-		page = BC.launchBrowser("chrome", "https://www.amazon.in/");
+		page = BC.launchBrowser("chrome", "https://www.amazon.in/",true);
 		hp = new HomePage(page);
 		
 		
@@ -24,7 +24,7 @@ public class HomepageTest  {
 	
 	@Test
 	public void TC1() {
-		hp.signInPage("Arun");
+		hp.signInPage("vinoth");
 		hp.validate();
 	}
 	
